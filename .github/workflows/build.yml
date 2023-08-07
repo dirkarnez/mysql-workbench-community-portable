@@ -13,6 +13,8 @@ jobs:
     env:
       targetZip: mysql-workbench-community-portable-${{ github.ref_name }}.zip
     steps:
+      - uses: actions/checkout@v3
+      
       - name: installer
         shell: cmd
         run: |
@@ -33,6 +35,9 @@ jobs:
         run: |
           cd "installation\SourceDir\MySQL" &&^
           rename "MySQL Workbench 8.0 CE" "MySQL_Workbench_8_0_CE"
+
+      - shell: cmd
+        run: xcopy /H /Y /C "MySQLWorkbench.exe.Portable.cmd" "installation\SourceDir\MySQL\MySQL_Workbench_8_0_CE"
           
       - name: Archive Release
         uses: thedoctor0/zip-release@master
